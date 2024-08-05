@@ -4,31 +4,26 @@
 using namespace std;
 
 class ThrowTheBall {
- private:
-  int passCount = 0;
-
-  int playerCount = 0;
-
  public:
   int timesThrown(int N, int M, int L) {
+    int playerCount = 0;
+    int passCount = 0;
     vector<int> player(N, 0);
+    player[0] = 1;
 
     while (player[playerCount] < M) {
-      std::cout << passCount << std::endl;
-
       if (player[playerCount] % 2 == 0) {
-        passCount = passCount + 1;
-
         playerCount = (playerCount + L) % N;
-
+        player[playerCount] = player[playerCount] + 1;
       } else {
-        passCount = passCount + 1;
-
         playerCount = (playerCount - L + N) % N;
+        player[playerCount] = player[playerCount] + 1;
       }
 
-      player[playerCount] = player[playerCount] + 1;
+      passCount++;
     }
+
+    std::cout << passCount << std::endl;
     return passCount;
   }
 };
